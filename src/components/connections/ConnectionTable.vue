@@ -103,7 +103,7 @@
                         CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
                       ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Host ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-lg truncate',
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-sm truncate',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Chains ===
                         (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xl truncate',
                     ),
@@ -157,10 +157,10 @@ import {
 import {
   fromNow,
   getDestinationFromConnection,
+  getDestinationTypeFromConnection,
   getIPLabelFromMap,
   getNetworkTypeFromConnection,
   getProcessFromConnection,
-  getTransferTypeFromConnection,
   prettyBytesHelper,
 } from '@/helper'
 import { renderConnections } from '@/store/connections'
@@ -316,7 +316,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('dlSpeed'),
     enableGrouping: false,
-    enableSorting: true,
+    sortDescFirst: true,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
     accessorFn: (original) => `${prettyBytesHelper(original.downloadSpeed)}/s`,
     sortingFn: (prev, next) => prev.original.downloadSpeed - next.original.downloadSpeed,
@@ -324,6 +324,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('ulSpeed'),
     enableGrouping: false,
+    sortDescFirst: true,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
     accessorFn: (original) => `${prettyBytesHelper(original.uploadSpeed)}/s`,
     sortingFn: (prev, next) => prev.original.uploadSpeed - next.original.uploadSpeed,
@@ -331,6 +332,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('dl'),
     enableGrouping: false,
+    sortDescFirst: true,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
     accessorFn: (original) => prettyBytesHelper(original.download),
     sortingFn: (prev, next) => prev.original.download - next.original.download,
@@ -338,6 +340,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('ul'),
     enableGrouping: false,
+    sortDescFirst: true,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
     accessorFn: (original) => prettyBytesHelper(original.upload),
     sortingFn: (prev, next) => prev.original.upload - next.original.upload,
@@ -360,9 +363,14 @@ const columns: ColumnDef<Connection>[] = [
     accessorFn: getDestinationFromConnection,
   },
   {
-    header: () => t('transferType'),
-    id: CONNECTIONS_TABLE_ACCESSOR_KEY.TransferType,
-    accessorFn: (original) => getTransferTypeFromConnection(original),
+    header: () => t('destinationType'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.DestinationType,
+    accessorFn: getDestinationTypeFromConnection,
+  },
+  {
+    header: () => t('proxyNodeAddress'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.ProxyNodeAddress,
+    accessorFn: (original) => original.metadata.remoteDestination || '-',
   },
 ]
 

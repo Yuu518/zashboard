@@ -5,10 +5,10 @@
       <div class="indicator">
         <span
           v-if="isUIUpdateAvailable"
-          class="indicator-item"
+          class="indicator-item top-1 -right-1 flex"
         >
-          <span class="badge badge-xs bg-secondary absolute animate-ping"></span>
-          <span class="badge badge-xs bg-secondary absolute"></span>
+          <span class="bg-secondary absolute h-2 w-2 animate-ping rounded-full"></span>
+          <span class="bg-secondary h-2 w-2 rounded-full"></span>
         </span>
         <a
           href="https://github.com/Zephyruso/zashboard"
@@ -31,88 +31,110 @@
     </div>
     <div class="card-body gap-4">
       <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            {{ $t('theme') }}
-            <select
-              class="select select-sm w-48"
-              v-model="theme"
-            >
-              <option
-                v-for="opt in themes"
-                :key="opt"
-                :value="opt"
-              >
-                {{ opt === 'default' ? $t('autoSwitch') : opt }}
-              </option>
-            </select>
-          </div>
-          <LanguageSelect />
-          <div class="flex items-center gap-2">
-            {{ $t('fonts') }}
-            <select
-              class="select select-sm w-48"
-              v-model="font"
-            >
-              <option
-                v-for="opt in Object.values(FONTS)"
-                :key="opt"
-                :value="opt"
-              >
-                {{ opt }}
-              </option>
-            </select>
-          </div>
+        <LanguageSelect />
+        <div class="flex items-center gap-2">
+          {{ $t('autoSwitchTheme') }}
+          <input
+            type="checkbox"
+            v-model="autoTheme"
+            class="toggle"
+          />
         </div>
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            <span class="shrink-0"> {{ $t('customBackgroundURL') }} </span>
-            <div class="join">
-              <TextInput
-                class="join-item max-w-64 flex-1"
-                v-model="customBackgroundURL"
-                :clearable="true"
-                @update:modelValue="handlerBackgroundURLChange"
-              />
-              <button
-                class="btn join-item btn-sm"
-                @click="handlerClickUpload"
-              >
-                <ArrowUpCircleIcon class="h-4 w-4" />
-              </button>
-            </div>
-            <input
-              ref="inputFileRef"
-              type="file"
-              accept="image/*"
-              class="hidden"
-              @change="handlerFileChange"
-            />
-          </div>
-          <div
-            class="flex items-center gap-2"
-            v-if="customBackgroundURL"
+        <div class="flex items-center gap-2">
+          {{ $t('defaultTheme') }}
+          <select
+            class="select select-sm w-48"
+            v-model="defaultTheme"
           >
-            {{ $t('transparent') }}
-            <input
-              type="range"
-              min="0"
-              max="100"
-              v-model="dashboardTransparent"
-              class="range max-w-64"
-              @touchstart.stop
-              @touchmove.stop
-              @touchend.stop
+            <option
+              v-for="opt in themes"
+              :key="opt"
+              :value="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="flex items-center gap-2"
+          v-if="autoTheme"
+        >
+          {{ $t('darkTheme') }}
+          <select
+            class="select select-sm w-48"
+            v-model="darkTheme"
+          >
+            <option
+              v-for="opt in themes"
+              :key="opt"
+              :value="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          {{ $t('fonts') }}
+          <select
+            class="select select-sm w-48"
+            v-model="font"
+          >
+            <option
+              v-for="opt in Object.values(FONTS)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ opt }}
+            </option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="shrink-0"> {{ $t('customBackgroundURL') }} </span>
+          <div class="join">
+            <TextInput
+              class="join-item max-w-64 flex-1"
+              v-model="customBackgroundURL"
+              :clearable="true"
+              @update:modelValue="handlerBackgroundURLChange"
             />
+            <button
+              class="btn join-item btn-sm"
+              @click="handlerClickUpload"
+            >
+              <ArrowUpCircleIcon class="h-4 w-4" />
+            </button>
           </div>
-          <div class="flex items-center gap-2 md:hidden">
-            {{ $t('swipeInTabs') }}
-            <input
-              type="checkbox"
-              v-model="swipeInTabs"
-              class="toggle"
-            />
-          </div>
+          <input
+            ref="inputFileRef"
+            type="file"
+            accept="image/*"
+            class="hidden"
+            @change="handlerFileChange"
+          />
+        </div>
+        <div
+          class="flex items-center gap-2"
+          v-if="customBackgroundURL"
+        >
+          {{ $t('transparent') }}
+          <input
+            type="range"
+            min="0"
+            max="100"
+            v-model="dashboardTransparent"
+            class="range max-w-64"
+            @touchstart.stop
+            @touchmove.stop
+            @touchend.stop
+          />
+        </div>
+        <div class="flex items-center gap-2 md:hidden">
+          {{ $t('swipeInTabs') }}
+          <input
+            type="checkbox"
+            v-model="swipeInTabs"
+            class="toggle"
+          />
         </div>
       </div>
       <div
@@ -162,12 +184,14 @@ import {
   saveBase64ToIndexedDB,
 } from '@/helper/utils'
 import {
+  autoTheme,
   autoUpgrade,
   customBackgroundURL,
+  darkTheme,
   dashboardTransparent,
+  defaultTheme,
   font,
   swipeInTabs,
-  theme,
 } from '@/store/settings'
 import { ArrowPathIcon, ArrowUpCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
@@ -212,7 +236,6 @@ const handlerClickUpgradeUI = async () => {
 }
 
 const themes = [
-  'default',
   'light',
   'dark',
   'light-daisyui-v5',

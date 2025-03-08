@@ -32,7 +32,7 @@ const en = {
   connectTime: 'Time',
   sourcePort: 'Source Port',
   destination: 'Destination',
-  transferType: 'Transfer Type',
+  destinationType: 'Dest Type',
   inboundUser: 'Inbound User',
   dl: 'DL',
   ul: 'UL',
@@ -47,7 +47,8 @@ const en = {
   customTableColumns: 'Custom Table Columns',
   customCardLines: 'Custom Card Lines',
   close: 'Close',
-  theme: 'Theme',
+  defaultTheme: 'Default Theme',
+  darkTheme: 'Dark Theme',
   proxyProvider: 'Proxy Provider',
   ruleProvider: 'Rule Provider',
   expire: 'Expire',
@@ -113,7 +114,7 @@ const en = {
   chinaIP: 'China IP',
   globalIP: 'Global IP',
   networkInfo: 'Network Info',
-  autoSwitch: 'Auto Switch',
+  autoSwitchTheme: 'Auto Switch Theme',
   customBackgroundURL: 'Background URL',
   splitOverviewPage: 'Split Overview Page',
   manageHiddenGroup: 'Manage Hidden Groups',
@@ -165,6 +166,9 @@ const en = {
   aliveTotal: 'Alive / Total',
   displaySelectedNode: 'Display Selected Node',
   displayLatencyNumber: 'Display Latency',
+  tipForFixed:
+    'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
+  proxyNodeAddress: 'Proxy Address',
 }
 
 export type LANG_MESSAGE = typeof en

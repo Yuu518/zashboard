@@ -34,7 +34,7 @@ const ru: LANG_MESSAGE = {
   connectTime: 'Время',
   sourcePort: 'Исходный порт',
   destination: 'Назначение',
-  transferType: 'Тип передачи',
+  destinationType: 'Тип назначения',
   inboundUser: 'Входящий пользователь',
   dl: 'Загр',
   ul: 'Отдч',
@@ -49,7 +49,8 @@ const ru: LANG_MESSAGE = {
   customTableColumns: 'Пользовательские столбцы таблицы',
   customCardLines: 'Пользовательские строчки карточки',
   close: 'Закрыть',
-  theme: 'Тема',
+  defaultTheme: 'Тема по умолчанию',
+  darkTheme: 'Темная тема',
   proxyProvider: 'Провайдер прокси',
   ruleProvider: 'Провайдер правил',
   expire: 'Истекает',
@@ -115,7 +116,7 @@ const ru: LANG_MESSAGE = {
   chinaIP: 'IP для Китая',
   globalIP: 'Мировой IP',
   networkInfo: 'Информация о сети',
-  autoSwitch: 'Автоматическое',
+  autoSwitchTheme: 'Автоматический темы',
   customBackgroundURL: 'URL фона',
   splitOverviewPage: 'Разделить страницу с обзором',
   manageHiddenGroup: 'Управление скрытыми группами',
@@ -167,6 +168,9 @@ const ru: LANG_MESSAGE = {
   aliveTotal: 'Живых / всего',
   displaySelectedNode: 'Отображать выбранный узел',
   displayLatencyNumber: 'Отображать задержку',
+  tipForFixed:
+    'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
+  proxyNodeAddress: 'Адрес узла прокси',
 }
 
 export default ru
