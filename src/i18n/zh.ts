@@ -33,7 +33,7 @@ const zh: LANG_MESSAGE = {
   process: '进程',
   connectTime: '连接时间',
   sourcePort: '源端口',
-  destination: '目标',
+  destination: '最终目标',
   destinationType: '目标类型',
   inboundUser: '入站用户',
   dl: '下载',
@@ -153,7 +153,6 @@ const zh: LANG_MESSAGE = {
   label: '标签',
   optional: '可选',
   swipeInTabs: '滑动切换页面二级标签',
-  connectionIP: '连接IP',
   simpleCardPreset: '简洁预设',
   detailedCardPreset: '详细预设',
   refresh: '刷新',
@@ -167,7 +166,10 @@ const zh: LANG_MESSAGE = {
   displaySelectedNode: '显示选中节点',
   displayLatencyNumber: '显示延迟数字',
   tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复urltest/fallback行为',
-  proxyNodeAddress: '节点地址',
+  remoteAddress: '远端地址',
+  themeName: '主题名称',
+  save: '保存',
+  moreDetails: '更多详情',
 }
 
 export default zh

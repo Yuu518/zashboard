@@ -31,7 +31,7 @@ const en = {
   process: 'Process',
   connectTime: 'Time',
   sourcePort: 'Source Port',
-  destination: 'Destination',
+  destination: 'Final Destination',
   destinationType: 'Dest Type',
   inboundUser: 'Inbound User',
   dl: 'DL',
@@ -153,7 +153,6 @@ const en = {
   label: 'Label',
   optional: 'Optional',
   swipeInTabs: 'Swipe to Switch Between Tabs',
-  connectionIP: 'Connection IP',
   simpleCardPreset: 'Simple Preset',
   detailedCardPreset: 'Detailed Preset',
   refresh: 'Refresh',
@@ -168,7 +167,10 @@ const en = {
   displayLatencyNumber: 'Display Latency',
   tipForFixed:
     'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
-  proxyNodeAddress: 'Proxy Address',
+  remoteAddress: 'Remote Address',
+  themeName: 'Theme Name',
+  save: 'Save',
+  moreDetails: 'More Details',
 }
 
 export type LANG_MESSAGE = typeof en

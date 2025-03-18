@@ -10,6 +10,8 @@ import {
   PROXY_SORT_TYPE,
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
+  TEST_URL,
+  type THEME,
 } from '@/constant'
 import { getMinCardWidth, isMiddleScreen, isPreferredDark } from '@/helper/utils'
 import type { SourceIPLabel } from '@/types'
@@ -29,12 +31,29 @@ export const defaultTheme = useStorage<string>(
 export const darkTheme = useStorage<string>('config/dark-theme', 'dark')
 export const autoTheme = useStorage<boolean>('config/auto-theme', isDefault)
 
+const replaceLegacyTheme = (theme: string) => {
+  if (theme === 'light-daisyui-v5') {
+    return 'light'
+  }
+
+  if (theme === 'dark-daisyui-v5') {
+    return 'dark'
+  }
+
+  return theme
+}
+
+defaultTheme.value = replaceLegacyTheme(defaultTheme.value)
+darkTheme.value = replaceLegacyTheme(darkTheme.value)
+
 export const theme = computed(() => {
   if (autoTheme.value && isPreferredDark.value) {
     return darkTheme.value
   }
   return defaultTheme.value
 })
+
+export const customThemes = useStorage<THEME[]>('config/custom-themes', [])
 
 export const language = useStorage<LANG>(
   'config/language',
@@ -75,10 +94,7 @@ export const showStatisticsWhenSidebarCollapsed = useStorage(
 // proxies
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
 export const twoColumnProxyGroup = useStorage('config/two-columns', true)
-export const speedtestUrl = useStorage<string>(
-  'config/speedtest-url',
-  'https://www.gstatic.com/generate_204',
-)
+export const speedtestUrl = useStorage<string>('config/speedtest-url', TEST_URL)
 export const independentLatencyTest = useStorage('config/independent-latency-test', false)
 export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
 export const proxySortType = useStorage<PROXY_SORT_TYPE>(
@@ -102,7 +118,7 @@ export const minProxyCardWidth = useStorage<number>(
 )
 export const manageHiddenGroup = useStorage('config/manage-hidden-group-mode', false)
 
-export const displayGlobalByMode = useStorage('config/display-global-by-mode', true)
+export const displayGlobalByMode = useStorage('config/display-global-by-mode', false)
 export const iconSize = useStorage('config/icon-size', 14)
 export const iconMarginRight = useStorage('config/icon-margin-right', 6)
 export const proxyCountMode = useStorage('config/proxies-count-mode', PROXY_COUNT_MODE.ALIVE_TOTAL)
@@ -136,16 +152,23 @@ export const connectionCardLines = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[][]
 )
 
 const filterLegacyDetailsOpt = (key: string) => key !== 'details'
-const replaceLegacyTransferType = (key: string) =>
-  key === 'transferType'
-    ? CONNECTIONS_TABLE_ACCESSOR_KEY.DestinationType
-    : (key as CONNECTIONS_TABLE_ACCESSOR_KEY)
+const replaceLegacyKey = (key: string) => {
+  if (key === 'transferType') {
+    return CONNECTIONS_TABLE_ACCESSOR_KEY.DestinationType
+  }
+
+  if (key === 'proxyNodeAddress') {
+    return CONNECTIONS_TABLE_ACCESSOR_KEY.RemoteAddress
+  }
+
+  return key as CONNECTIONS_TABLE_ACCESSOR_KEY
+}
 
 connectionTableColumns.value = connectionTableColumns.value
   .filter(filterLegacyDetailsOpt)
-  .map(replaceLegacyTransferType)
+  .map(replaceLegacyKey)
 connectionCardLines.value = connectionCardLines.value.map((lines) =>
-  lines.filter(filterLegacyDetailsOpt).map(replaceLegacyTransferType),
+  lines.filter(filterLegacyDetailsOpt).map(replaceLegacyKey),
 )
 
 const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})

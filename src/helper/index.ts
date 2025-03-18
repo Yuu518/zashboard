@@ -1,12 +1,20 @@
 import { proxiesFilter } from '@/composables/proxies'
-import { NOT_CONNECTED, PROXY_SORT_TYPE, PROXY_TYPE, ROUTE_NAME } from '@/constant'
+import {
+  NOT_CONNECTED,
+  PROXY_CHAIN_DIRECTION,
+  PROXY_SORT_TYPE,
+  PROXY_TYPE,
+  ROUTE_NAME,
+} from '@/constant'
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
+  customThemes,
   hideUnavailableProxies,
   language,
   lowLatency,
   mediumLatency,
+  proxyChainDirection,
   proxySortType,
   sourceIPLabelList,
   splitOverviewPage,
@@ -177,6 +185,16 @@ export const getDestinationTypeFromConnection = (connection: Connection) => {
   }
 }
 
+export const getChainsStringFromConnection = (connection: Connection) => {
+  const chains = [...connection.chains]
+
+  if (proxyChainDirection.value === PROXY_CHAIN_DIRECTION.NORMAL) {
+    chains.reverse()
+  }
+
+  return chains.join('')
+}
+
 export const getNetworkTypeFromConnection = (connection: Connection) => {
   return `${connection.metadata.type} | ${connection.metadata.network}`
 }
@@ -243,3 +261,23 @@ export const renderRoutes = computed(() => {
     return ![ROUTE_NAME.setup, !splitOverviewPage.value && ROUTE_NAME.overview].includes(r)
   })
 })
+
+export const applyCustomThemes = () => {
+  document.querySelectorAll('.custom-theme').forEach((style) => {
+    style.remove()
+  })
+  customThemes.value.forEach((theme) => {
+    const style = document.createElement('style')
+    const styleString = Object.entries(theme)
+      .filter(([key]) => !['prefersdark', 'default', 'name', 'type', 'id'].includes(key))
+      .map(([key, value]) => `${key}:${value}`)
+      .join(';')
+
+    style.innerHTML = `[data-theme="${theme.name}"] {
+      ${styleString} 
+    }`
+
+    style.className = `custom-theme ${theme.name}`
+    document.head.appendChild(style)
+  })
+}

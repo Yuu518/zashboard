@@ -2,6 +2,56 @@
 
 # Changelog
 
+## [1.74.0](https://github.com/Zephyruso/zashboard/compare/v1.73.1...v1.74.0) (2025-03-18)
+
+
+### Features
+
+* add custom theme ([4679ddd](https://github.com/Zephyruso/zashboard/commit/4679dddb900271386e430e7bc691bbf06fb44180))
+
+
+### Bug Fixes
+
+* highlight text for dark theme ([902af5c](https://github.com/Zephyruso/zashboard/commit/902af5cff064d9f3b29329383be43b48f1d6d089))
+
+## [1.73.1](https://github.com/Zephyruso/zashboard/compare/v1.73.0...v1.73.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* make daisyui v5 theme as default ([e0bc078](https://github.com/Zephyruso/zashboard/commit/e0bc07881ce62258534e40874513455864c6a987))
+* proxy chains sort ([3415c3f](https://github.com/Zephyruso/zashboard/commit/3415c3f89b29df6f2bdefca7e66e5aba8be482db))
+* style for connection details ([17d3504](https://github.com/Zephyruso/zashboard/commit/17d3504eac86856d24cb8e7b3312c1d299d42f96))
+
+## [1.73.0](https://github.com/Zephyruso/zashboard/compare/v1.72.3...v1.73.0) (2025-03-14)
+
+
+### Features
+
+* support all sing-box log level ([864997c](https://github.com/Zephyruso/zashboard/commit/864997c21efd1f14c8abe3cd76247529f0c4cb7c))
+
+
+### Bug Fixes
+
+* catch testurl is empty ([a40c7e3](https://github.com/Zephyruso/zashboard/commit/a40c7e312d5d9e1ca7a2e9d32ad1a5e870e75578))
+* remove openai cdn test ([78bfe09](https://github.com/Zephyruso/zashboard/commit/78bfe0945bb09fa9f9d5f30227b6e1a4c3fdda93))
+* remove redirect to setup when api 404 ([50ca346](https://github.com/Zephyruso/zashboard/commit/50ca346b806491c12fa066ffca1bc75353a6310e))
+
+## [1.72.3](https://github.com/Zephyruso/zashboard/compare/v1.72.2...v1.72.3) (2025-03-12)
+
+
+### Bug Fixes
+
+* prevent selecting a selected node ([b7fd831](https://github.com/Zephyruso/zashboard/commit/b7fd8316420574da51b591bfac55a5afc085f1aa))
+
+## [1.72.2](https://github.com/Zephyruso/zashboard/compare/v1.72.1...v1.72.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* animation for swipe page ([f25078c](https://github.com/Zephyruso/zashboard/commit/f25078cad670cc4dcae709a8fe095d79722768c1))
+* i18n for remote destination ([788fef0](https://github.com/Zephyruso/zashboard/commit/788fef0fa8c0a979c4d290032a2c507826868474))
+
 ## [1.72.1](https://github.com/Zephyruso/zashboard/compare/v1.72.0...v1.72.1) (2025-03-07)
 
 
