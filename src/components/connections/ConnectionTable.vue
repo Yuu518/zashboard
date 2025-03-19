@@ -103,9 +103,12 @@
                         CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
                       ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Host ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-sm truncate',
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.Chains ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xl truncate',
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xs truncate',
+                      [
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Rule,
+                      ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
+                        'max-w-xl truncate',
                     ),
               ]"
             >
@@ -159,6 +162,7 @@ import {
   getChainsStringFromConnection,
   getDestinationFromConnection,
   getDestinationTypeFromConnection,
+  getHostFromConnection,
   getIPLabelFromMap,
   getNetworkTypeFromConnection,
   getProcessFromConnection,
@@ -251,20 +255,17 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t(CONNECTIONS_TABLE_ACCESSOR_KEY.Type),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Type,
-    accessorFn: (original) => getNetworkTypeFromConnection(original),
+    accessorFn: getNetworkTypeFromConnection,
   },
   {
     header: () => t(CONNECTIONS_TABLE_ACCESSOR_KEY.Process),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Process,
-    accessorFn: (original) => getProcessFromConnection(original),
+    accessorFn: getProcessFromConnection,
   },
   {
     header: () => t(CONNECTIONS_TABLE_ACCESSOR_KEY.Host),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Host,
-    accessorFn: (original) =>
-      `${
-        original.metadata.host || original.metadata.sniffHost || original.metadata.destinationIP
-      }:${original.metadata.destinationPort}`,
+    accessorFn: getHostFromConnection,
   },
   {
     header: () => t(CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost),
