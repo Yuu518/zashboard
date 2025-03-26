@@ -2,6 +2,27 @@
 
 # Changelog
 
+## [1.76.0](https://github.com/Zephyruso/zashboard/compare/v1.75.2...v1.76.0) (2025-03-26)
+
+
+### Features
+
+* custom icon for sing-box ([6db29e2](https://github.com/Zephyruso/zashboard/commit/6db29e2b7a2cc885a3ae67fd301bf18df1922996))
+
+
+### Bug Fixes
+
+* outline style ([c840ab2](https://github.com/Zephyruso/zashboard/commit/c840ab2d71ff8f4f118ac98dc7d00bff3b400e71))
+
+## [1.75.2](https://github.com/Zephyruso/zashboard/compare/v1.75.1...v1.75.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* collapse animation performance ([9c72e96](https://github.com/Zephyruso/zashboard/commit/9c72e961725a15196188edb3731c8c48d6944237))
+* missing collapse all btn in mobile ([3e7ee22](https://github.com/Zephyruso/zashboard/commit/3e7ee224f0646820f6f3635c37d8b05a95644457))
+* region for details ([eaf8cf1](https://github.com/Zephyruso/zashboard/commit/eaf8cf1127bafaa6dfa83d9d90f60ae972489e3c))
+
 ## [1.75.1](https://github.com/Zephyruso/zashboard/compare/v1.75.0...v1.75.1) (2025-03-21)
 
 

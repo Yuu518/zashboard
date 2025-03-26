@@ -25,8 +25,8 @@ const zh: LANG_MESSAGE = {
   sortBy: '排序方式',
   rule: '规则',
   sourceIP: '源IP',
-  activeConnections: '活跃连接',
-  closedConnections: '已关闭连接',
+  activeConnections: '活跃',
+  closedConnections: '已关闭',
   logLevel: '日志等级',
   twoColumnProxyGroup: '双列显示代理组',
   type: '类型',
@@ -170,6 +170,7 @@ const zh: LANG_MESSAGE = {
   themeName: '主题名称',
   save: '保存',
   moreDetails: '更多详情',
+  customIcon: '自定义图标',
 }
 
 export default zh
