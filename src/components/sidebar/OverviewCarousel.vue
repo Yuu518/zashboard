@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="card carousel carousel-vertical hover:scrollbar-thin h-28 shrink-0 overflow-x-hidden text-sm"
-  >
-    <SpeedCharts class="carousel-item box-border" />
-    <MemoryCharts class="carousel-item box-border" />
-    <ConnectionsCharts class="carousel-item box-border" />
+  <div class="card max-h-84 min-h-28 flex-2 shrink-0 overflow-x-hidden overflow-y-auto text-sm">
+    <SpeedCharts class="h-28 shrink-0" />
+    <MemoryCharts class="h-28 shrink-0" />
+    <ConnectionsCharts class="h-28 shrink-0" />
   </div>
 </template>
 
