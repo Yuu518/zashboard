@@ -1,5 +1,7 @@
 <template>
-  <div class="card max-h-84 min-h-28 flex-2 shrink-0 overflow-x-hidden overflow-y-auto text-sm">
+  <div
+    class="card not-hover:scrollbar-hidden max-h-56 min-h-28 flex-2 shrink-0 overflow-x-hidden overflow-y-auto text-sm"
+  >
     <SpeedCharts class="h-28 shrink-0" />
     <MemoryCharts class="h-28 shrink-0" />
     <ConnectionsCharts class="h-28 shrink-0" />
