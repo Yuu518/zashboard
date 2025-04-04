@@ -6,14 +6,14 @@
   >
     <option :value="null">{{ $t('allSourceIP') }}</option>
     <option
-      v-if="sourceIPOpts.every((i) => i.value !== sourceIPFilter) && sourceIPFilter !== null"
+      v-if="sourceIPOpts.every((i) => !isEqual(i.value, sourceIPFilter)) && sourceIPFilter !== null"
       :value="sourceIPFilter"
     >
-      {{ getIPLabelFromMap(sourceIPFilter) }}
+      {{ getIPLabelFromMap(sourceIPFilter[0]) }}
     </option>
     <option
       v-for="opt in sourceIPOpts"
-      :key="opt.value"
+      :key="opt.value.join(',')"
       :value="opt.value"
     >
       {{ opt.label }}
@@ -33,17 +33,28 @@ defineProps<{
 const sourceIPs = computed(() => {
   return uniq(connections.value.map((conn) => conn.metadata.sourceIP)).sort()
 })
-const sourceIPOpts = ref<{ label: string; value: string }[]>([])
+const sourceIPOpts = ref<{ label: string; value: string[] }[]>([])
 
 // do not use computed here for firefox
 watch(
   sourceIPs,
   (value, oldValue) => {
     if (isEqual(value, oldValue)) return
-    sourceIPOpts.value = sourceIPs.value.map((ip) => ({
-      label: getIPLabelFromMap(ip),
-      value: ip,
-    }))
+    sourceIPOpts.value = []
+
+    sourceIPs.value.forEach((ip) => {
+      const label = getIPLabelFromMap(ip)
+      const index = sourceIPOpts.value.findIndex((opt) => opt.label === label)
+
+      if (index === -1) {
+        sourceIPOpts.value.push({
+          label,
+          value: [ip],
+        })
+      } else {
+        sourceIPOpts.value[index].value.push(ip)
+      }
+    })
   },
   {
     immediate: true,
